@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String pdfFileName = "help_en.pdf";
+        String pdfFileName = getResources().getString(R.string.pdf_help_document);
 
         startActivity(new Intent(getApplicationContext(),
                 PdfActivity.class).putExtra(PdfActivity.PDF_ACTIVITY_EXTRAS_KEY, pdfFileName));
