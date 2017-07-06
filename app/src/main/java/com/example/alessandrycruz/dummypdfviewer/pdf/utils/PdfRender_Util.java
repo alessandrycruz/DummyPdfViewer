@@ -16,13 +16,13 @@ import java.io.OutputStream;
  * Created by alessandry.cruz on 7/5/2017.
  */
 
-public class Pdf_Util {
+public class PdfRender_Util {
     private static final int BITMAP_TARGET_RESOLUTION_IN_DPI = 72;
     private static final int BIT_MAP_SCALE = 2;
     private static final int ONE_MB = 1024;
     private static final int ZERO = 0;
 
-    private static final String TAG = Pdf_Util.class.getSimpleName();
+    private static final String TAG = PdfRender_Util.class.getSimpleName();
     private static final String ASSETS_HELP_FOLDER = "help";
     private static final String SLASH = "/";
 

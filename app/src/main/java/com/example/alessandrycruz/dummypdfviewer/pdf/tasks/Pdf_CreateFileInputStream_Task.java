@@ -5,7 +5,7 @@ import android.graphics.pdf.PdfRenderer;
 import android.os.AsyncTask;
 
 import com.example.alessandrycruz.dummypdfviewer.pdf.listeners.Pdf_CreateFileInputStream_Listener;
-import com.example.alessandrycruz.dummypdfviewer.pdf.utils.Pdf_Util;
+import com.example.alessandrycruz.dummypdfviewer.pdf.utils.PdfRender_Util;
 
 /**
  * Created by alessandry.cruz on 7/6/2017.
@@ -14,7 +14,7 @@ import com.example.alessandrycruz.dummypdfviewer.pdf.utils.Pdf_Util;
 public class Pdf_CreateFileInputStream_Task extends AsyncTask<Void, Void, PdfRenderer> {
     private Context mContext;
     private Pdf_CreateFileInputStream_Listener mPdf_createFileInputStream_Listener;
-    private Pdf_Util mPdf_Utils;
+    private PdfRender_Util mPdfRender_Util;
     private String mPdfFileName;
 
     public Pdf_CreateFileInputStream_Task(Context context, String pdfFileName,
@@ -29,12 +29,12 @@ public class Pdf_CreateFileInputStream_Task extends AsyncTask<Void, Void, PdfRen
     protected void onPreExecute() {
         super.onPreExecute();
 
-        mPdf_Utils = new Pdf_Util();
+        mPdfRender_Util = new PdfRender_Util();
     }
 
     @Override
     protected PdfRenderer doInBackground(Void... voids) {
-        return mPdf_Utils.initializePdfFile(mContext, mPdfFileName);
+        return mPdfRender_Util.initializePdfFile(mContext, mPdfFileName);
     }
 
     @Override

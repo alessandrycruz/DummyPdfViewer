@@ -15,7 +15,8 @@ import com.example.alessandrycruz.dummypdfviewer.R;
 import com.example.alessandrycruz.dummypdfviewer.pdf.listeners.Pdf_ConvertPdfPageToBitmap_Listener;
 import com.example.alessandrycruz.dummypdfviewer.pdf.listeners.Pdf_CreateFileInputStream_Listener;
 import com.example.alessandrycruz.dummypdfviewer.pdf.tasks.Pdf_Taskset;
-import com.example.alessandrycruz.dummypdfviewer.pdf.utils.Pdf_Util;
+import com.example.alessandrycruz.dummypdfviewer.pdf.utils.PdfBase_Util;
+import com.example.alessandrycruz.dummypdfviewer.pdf.utils.PdfRender_Util;
 
 /**
  * Created by alessandry.cruz on 7/5/2017.
@@ -35,7 +36,8 @@ public class PdfActivity extends Activity {
     private Button mButtonNext;
     private Context mContext;
     private ImageView mImageViewPdf;
-    private Pdf_Util mPdf_Util;
+    private PdfBase_Util mPdfBase_Util;
+    private PdfRender_Util mPdfRender_Util;
     private PdfRenderer mPdfRenderer;
     private String mPdfFileName;
     private Pdf_Taskset mPdf_Taskset;
@@ -64,6 +66,15 @@ public class PdfActivity extends Activity {
         destroyPdf();
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        if (hasFocus) {
+            hideNavigationBar();
+        }
+    }
+
     public void onClickPrevious(View view) {
         goToPreviousPage();
     }
@@ -72,11 +83,16 @@ public class PdfActivity extends Activity {
         goToNextPage();
     }
 
+    private void hideNavigationBar() {
+        mPdfBase_Util.hideSystemUiImmersiveSticky(this);
+    }
+
     private void initializeGlobalMembers() {
         mButtonPrevious = findViewById(R.id.button_previous_pdf);
         mButtonNext = findViewById(R.id.button_next_pdf);
         mContext = getApplicationContext();
-        mPdf_Util = new Pdf_Util();
+        mPdfBase_Util = new PdfBase_Util();
+        mPdfRender_Util = new PdfRender_Util();
         mImageViewPdf = findViewById(R.id.image_view_pdf);
         mPdf_Taskset = new Pdf_Taskset();
         mProgressBar = findViewById(R.id.progress_bar_pdf);
@@ -140,7 +156,7 @@ public class PdfActivity extends Activity {
 
                         mPdfRenderer = pdfRenderer;
 
-                        mPdfPageCount = mPdf_Util.getPdfPageCount(mPdfRenderer);
+                        mPdfPageCount = mPdfRender_Util.getPdfPageCount(mPdfRenderer);
 
                         loadPdfPage();
                     }
@@ -172,6 +188,6 @@ public class PdfActivity extends Activity {
     }
 
     private void destroyPdf() {
-        mPdf_Util.closePdfRenderer(mPdfRenderer);
+        mPdfRender_Util.closePdfRenderer(mPdfRenderer);
     }
 }

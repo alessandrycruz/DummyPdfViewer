@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.alessandrycruz.dummypdfviewer.pdf.listeners.Pdf_ConvertPdfPageToBitmap_Listener;
-import com.example.alessandrycruz.dummypdfviewer.pdf.utils.Pdf_Util;
+import com.example.alessandrycruz.dummypdfviewer.pdf.utils.PdfRender_Util;
 
 /**
  * Created by alessandry.cruz on 7/6/2017.
@@ -20,7 +20,7 @@ public class Pdf_ConvertPdfPageToBitmap_Task extends AsyncTask<Void, Void, Bitma
 
     private Context mContext;
     private PdfRenderer mPdfRenderer;
-    private Pdf_Util mPdf_Utils;
+    private PdfRender_Util mPdfRender_Util;
     private Pdf_ConvertPdfPageToBitmap_Listener mPdf_convertPdfPageToBitmap_Listener;
 
     public Pdf_ConvertPdfPageToBitmap_Task(Context context, PdfRenderer pdfRenderer, int pdfPage,
@@ -36,13 +36,13 @@ public class Pdf_ConvertPdfPageToBitmap_Task extends AsyncTask<Void, Void, Bitma
     protected void onPreExecute() {
         super.onPreExecute();
 
-        mPdf_Utils = new Pdf_Util();
+        mPdfRender_Util = new PdfRender_Util();
     }
 
     @Override
     protected Bitmap doInBackground(Void... voids) {
         try {
-            return mPdf_Utils.pdfToBitmap(mContext, mPdfRenderer, mPdfPage);
+            return mPdfRender_Util.pdfToBitmap(mContext, mPdfRenderer, mPdfPage);
         } catch (Exception e) {
             Log.e(TAG, "Exception: " + e);
         }
